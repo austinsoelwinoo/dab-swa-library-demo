@@ -5,7 +5,6 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import './App.css';
 
 import BookList from './Components/BookList/BookList';
-import AuthorList from './Components/AuthorList/AuthorList';
 
 const client = new ApolloClient({
   uri: '/data-api/graphql',
@@ -18,7 +17,7 @@ function App() {
   //read token from cookie StaticWebAppsAuthCookie
   let token;
 
-  try{
+  try {
     token = document.cookie.split(';').find(c => c.trim().startsWith('StaticWebAppsAuthCookie=')).split('=')[1];
   } catch (e) {
     token = null;
@@ -28,25 +27,24 @@ function App() {
     <ApolloProvider client={client}>
       <div className="App">
         <Navbar bg="dark" variant="dark">
-          <div className="maxWidth1200Centered" style={{ display: 'flex', padding: '1rem', justifyContent: 'space-between'}}>
+          <div className="maxWidth1200Centered" style={{ display: 'flex', padding: '1rem', justifyContent: 'space-between' }}>
             <Navbar.Brand>Library Demo</Navbar.Brand>
             <Nav className="ml-auto">
-              { token ?
-                  <Button variant="light">
-                    <a href='/.auth/logout'>Logout</a>
-                  </Button>
+              {token ?
+                <Button variant="light">
+                  <a href='/.auth/logout'>Logout</a>
+                </Button>
                 :
-                  <Button variant="light">
-                    <a href='/.auth/login/github'>Login</a>
-                  </Button>
+                <Button variant="light">
+                  <a href='/.auth/login/github'>Login</a>
+                </Button>
               }
             </Nav>
           </div>
         </Navbar>
 
         <div className="maxWidth1200Centered">
-          <BookList/>
-          {/* <AuthorList/> */}
+          <BookList />
         </div>
       </div>
     </ApolloProvider>
