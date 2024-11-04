@@ -1,6 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-import { Navbar, Nav, Button } from 'react-bootstrap';
 import { AzureOpenAI } from 'openai';
 import './App.css';
 

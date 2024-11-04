@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, Button, } from 'react-bootstrap';
 import './BookList.css';
 import CreateBookModal from './CreateBookModal';
@@ -28,8 +28,6 @@ const BookList = () => {
             "transcript": "testing Flow1"
         }
     ]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [showModal, setShowModal] = useState(false);
 
     // const fetchData = async (disableLoadState) => {
@@ -89,7 +87,9 @@ const BookList = () => {
                         Create
                     </Button>
                 </div>
-                <CreateBookModal showModal={showModal} setShowModal={setShowModal} refetch={{}} />
+                <CreateBookModal showModal={showModal} setShowModal={setShowModal} refetch={
+                    setCompliances([])
+                } />
             </div>
             <div className='book-list'>
                 {compliances.map(compliance =>
