@@ -6,7 +6,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 
 const BookList = () => {
-    const [compliances, setCompliances] = useState([
+    const [compliances] = useState([
         {
             "id": "1",
             "name": "Testing",
