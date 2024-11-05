@@ -22,8 +22,9 @@
 			"type": "func",
 			"label": "func: host start",
 			"command": "host start",
-			"problemMatcher": "$func-python-watch",
+			"problemMatcher": "$func-node-watch",
 			"isBackground": true,
+			"dependsOn": "npm install (functions)",
 			"options": {
 				"cwd": "${workspaceFolder}/api"
 			}

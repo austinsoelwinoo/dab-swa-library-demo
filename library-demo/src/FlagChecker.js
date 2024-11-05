@@ -47,3 +47,45 @@ async function check_compliance(transcript) {
 }
 
 check_compliance(TRANSCRIPT)
+
+// const [data, setData] = useState('');
+
+// useEffect(() => {
+//     (async function () {
+//         const responseGet = await fetch("/api/httpTrigger13", {
+//             method: "GET"
+//         });
+//         const listData = await responseGet.text()
+//         setData(listData);
+//         console.log("response", listData);
+
+//         const responsePost = await fetch("/api/httpTrigger13", {
+//             method: "POST",
+//             body: JSON.stringify(
+//                 {
+//                     "rowKey": Date.now(),
+//                     "name": "Name",
+//                     "transcript": "Transcript",
+//                     "complianceFlag": "Flag",
+//                     "complianceReason": "Reason"
+//                 }
+//             ),
+//         });
+//         console.log("response", await responsePost.text());
+
+//         const responsePut = await fetch("/api/httpTrigger13", {
+//             method: "PUT",
+//             body: JSON.stringify(
+//                 {
+//                     "partitionKey": "CompliancePartition",
+//                     "rowKey": "1",
+//                     "name": "Name",
+//                     "transcript": "Transcript",
+//                     "complianceFlag": "Flag",
+//                     "complianceReason": "Reason"
+//                 }
+//             ),
+//         });
+//         console.log("response", await responsePut.text());
+//     })();
+// });

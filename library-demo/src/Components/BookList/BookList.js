@@ -29,50 +29,7 @@ const BookList = () => {
         }
     ]);
     const [showModal, setShowModal] = useState(false);
-
-    // const fetchData = async (disableLoadState) => {
-    //     if (!disableLoadState) setIsLoading(true);
-    //     try {
-    //         const response = await fetch('/data-api/api/Book');
-    //         console.log("response", response);
-    //         if (!response.ok) {
-    //             throw new Error(response.statusText);
-    //         }
-    //         const data = await response.json();
-    //         setBooks(data.value);
-    //     } catch (error) {
-    //         setError(error);
-    //     }
-    //     setIsLoading(false);
-    // };
-
-    // const deleteBook = async (id) => {
-    //     try {
-    //         const response = await fetch(`/data-api/api/Book/id/${id}`, {
-    //             method: 'DELETE',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             }
-    //         });
-    //         if (!response.ok) {
-    //             throw new Error(response.statusText);
-    //         }
-    //         await fetchData(true);
-    //     } catch (error) { }
-    // }
-
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
-
-    // if (error) {
-    //     return <p>{error.message}</p>;
-    // }
-
-    // if (isLoading) {
-    //     return <p>Loading ...</p>;
-    // }
-    const [alignment, setAlignment] = React.useState('web');
+    const [alignment, setAlignment] = React.useState('Compliant');
 
     const handleChange = (event, newAlignment) => {
         setAlignment(newAlignment);
@@ -87,9 +44,7 @@ const BookList = () => {
                         Create
                     </Button>
                 </div>
-                <CreateBookModal showModal={showModal} setShowModal={setShowModal} refetch={
-                    setCompliances([])
-                } />
+                <CreateBookModal showModal={showModal} setShowModal={setShowModal} refetch={{}} />
             </div>
             <div className='book-list'>
                 {compliances.map(compliance =>
