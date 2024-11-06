@@ -15,7 +15,7 @@ const BookList = () => {
     async function getAllCompliance() {
         const responseGet = await fetch(BASE_URL, {
             method: "GET",
-            mode: 'no-cors'
+            //mode: 'no-cors'
         });
         const listData = await responseGet.text()
         console.log("listData", listData)
@@ -26,7 +26,7 @@ const BookList = () => {
     async function updateCompliance(compliance) {
         const responseUpdate = await fetch(BASE_URL, {
             method: "PUT",
-            mode: 'no-cors',
+            //mode: 'no-cors',
             body: JSON.stringify(compliance),
         });
         const listData = await responseUpdate.text()
@@ -50,7 +50,7 @@ const BookList = () => {
                     <Card key={compliance.id} style={{ width: '33rem', margin: '1rem' }}>
                         <Card.Body>
                             <Card.Title>{compliance.name}</Card.Title>
-                            <Card.Text>
+                            <Card.Text style={{ whiteSpace: 'pre-wrap' }}>
                                 {compliance.transcript}
                             </Card.Text>
                             <ToggleButtonGroup

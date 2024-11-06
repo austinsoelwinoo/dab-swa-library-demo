@@ -47,6 +47,7 @@ app.http('complianceTrigger', {
                 for await (const entity of client.listEntities()) {
                     entities.push(entity);
                 }
+                context.log("GETALL", JSON.stringify(entities))
                 return {
                     status: 200,
                     body: JSON.stringify(entities)
