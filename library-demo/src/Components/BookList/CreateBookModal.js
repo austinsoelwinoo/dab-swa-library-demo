@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import './BookList.css';
+import { BASE_URL } from "./FlagChecker"
 
 function CreateBookModal({ showModal, setShowModal, refetch }) {
     const [name, setName] = useState('');
@@ -8,18 +9,19 @@ function CreateBookModal({ showModal, setShowModal, refetch }) {
 
     const createBookRequest = async () => {
         try {
-            const response = await fetch('/data-api/api/Book', {
-                method: 'POST',
-                body: JSON.stringify({
-                    name,
-                    transcript
-                })
+            const response = await fetch(BASE_URL, {
+                method: "POST",
+                body: JSON.stringify(
+                    {
+                        "name": name,
+                        "transcript": transcript,
+                    }
+                ),
             });
-            const data = await response.json();
+            const data = await response.text();
+            console.log("data", data)
             if (response.ok) {
                 setShowModal(false);
-            } else {
-                throw new Error(data.message);
             }
         } catch (error) {
             console.error(error);

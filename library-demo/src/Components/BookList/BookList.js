@@ -1,39 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Button, } from 'react-bootstrap';
 import './BookList.css';
 import CreateBookModal from './CreateBookModal';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
+import { BASE_URL, COMPLIANT, NON_COMPLIANT, NEED_REVIEW } from "./FlagChecker"
 const BookList = () => {
-    const [compliances] = useState([
-        {
-            "id": "1",
-            "name": "Testing",
-            "transcript": "testing Flow"
-        },
-        {
-            "id": "2",
-            "name": "Testing1",
-            "transcript": "testing Flow1"
-        },
-        {
-            "id": "3",
-            "name": "Testing",
-            "transcript": "testing Flow"
-        },
-        {
-            "id": "4",
-            "name": "Testing1",
-            "transcript": "testing Flow1"
-        }
-    ]);
-    const [showModal, setShowModal] = useState(false);
-    const [alignment, setAlignment] = React.useState('Compliant');
+    const [compliances, setCompliances] = useState([]);
 
-    const handleChange = (event, newAlignment) => {
-        setAlignment(newAlignment);
-    };
+    useEffect(() => {
+        getAllCompliance()
+    }, [])
+
+    async function getAllCompliance() {
+        const responseGet = await fetch(BASE_URL, {
+            method: "GET"
+        });
+        const listData = await responseGet.text()
+        console.log("listData", listData)
+        setCompliances(JSON.parse(listData));
+    }
+    const [showModal, setShowModal] = useState(false);
+
+    async function updateCompliance(compliance) {
+        const responseUpdate = await fetch(BASE_URL, {
+            method: "PUT",
+            body: JSON.stringify(compliance),
+        });
+        const listData = await responseUpdate.text()
+        console.log("listData", listData)
+        setCompliances(JSON.parse(listData));
+    }
 
     return (
         <div className='book-page'>
@@ -55,13 +52,19 @@ const BookList = () => {
                                 {compliance.transcript}
                             </Card.Text>
                             <ToggleButtonGroup
-                                value={alignment}
+                                value={compliance.complianceFlag}
                                 exclusive
-                                onChange={handleChange}>
-                                <ToggleButton value="web" color="success" size='small'>Compliant</ToggleButton>
-                                <ToggleButton value="android" color="warning">Need-Review</ToggleButton>
-                                <ToggleButton value="ios" color="error">Non-Compliant</ToggleButton>
+                                onChange={(_event, newFlag) => {
+                                    compliance.complianceFlag = newFlag
+                                    updateCompliance(compliance)
+                                }}>
+                                <ToggleButton value={COMPLIANT} color="success" size='small'>{COMPLIANT}</ToggleButton>
+                                <ToggleButton value={NEED_REVIEW} color="warning" size='small'>{NEED_REVIEW}</ToggleButton>
+                                <ToggleButton value={NON_COMPLIANT} color="error" size='small'>{NON_COMPLIANT}</ToggleButton>
                             </ToggleButtonGroup>
+                            <Card.Footer>
+                                {compliance.complianceReason}
+                            </Card.Footer>
                         </Card.Body>
                     </Card>
                 )}
