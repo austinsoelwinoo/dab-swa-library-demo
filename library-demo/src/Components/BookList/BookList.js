@@ -14,7 +14,8 @@ const BookList = () => {
 
     async function getAllCompliance() {
         const responseGet = await fetch(BASE_URL, {
-            method: "GET"
+            method: "GET",
+            mode: 'no-cors'
         });
         const listData = await responseGet.text()
         console.log("listData", listData)
@@ -25,6 +26,7 @@ const BookList = () => {
     async function updateCompliance(compliance) {
         const responseUpdate = await fetch(BASE_URL, {
             method: "PUT",
+            mode: 'no-cors',
             body: JSON.stringify(compliance),
         });
         const listData = await responseUpdate.text()

@@ -11,6 +11,7 @@ function CreateBookModal({ showModal, setShowModal, refetch }) {
         try {
             const response = await fetch(BASE_URL, {
                 method: "POST",
+                mode: 'no-cors',
                 body: JSON.stringify(
                     {
                         "name": name,
