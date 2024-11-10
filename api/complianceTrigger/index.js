@@ -2,11 +2,23 @@ const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
 const axios = require('axios');
 const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;  // Ensure this is set in environment
 const tableName = "Compliance";  // Replace with your Azure Table name
+const client = TableClient.fromConnectionString(connectionString, tableName);
 
+async function ensureTableExists() {
+    try {
+        await client.createTable();
+        console.log(`Table ${tableName} created.`);
+    } catch (error) {
+        if (error.statusCode === 409) { // 409 = Table already exists
+            console.log(`Table ${tableName} already exists.`);
+        } else {
+            throw error;
+        }
+    }
+}
 module.exports = async function (context, request) {
+    await ensureTableExists(); // Ensure the table is created before any operations
     context.log(`Http function processed request for url ${request.url} ${request.method} ${JSON.stringify(request.params)}`);
-    const client = TableClient.fromConnectionString(connectionString, tableName);
-
     const requestData = request.params;
     const partitionKey = "CompliancePartition";
     //;
