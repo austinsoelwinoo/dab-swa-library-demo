@@ -47,12 +47,14 @@ const BookList = () => {
             </div>
             <div className='book-list'>
                 {compliances.map(compliance =>
-                    <Card key={compliance.id} style={{ width: '33rem', margin: '1rem' }}>
+                    <Card key={compliance.id} className="m-2">
                         <Card.Body>
                             <Card.Title>{compliance.name}</Card.Title>
                             <Card.Text style={{ whiteSpace: 'pre-wrap' }}>
                                 {compliance.transcript}
                             </Card.Text>
+                        </Card.Body>
+                        <Card.Footer>
                             <ToggleButtonGroup
                                 value={compliance.complianceFlag}
                                 exclusive
@@ -64,10 +66,8 @@ const BookList = () => {
                                 <ToggleButton value={NEED_REVIEW} color="warning" size='small'>{NEED_REVIEW}</ToggleButton>
                                 <ToggleButton value={NON_COMPLIANT} color="error" size='small'>{NON_COMPLIANT}</ToggleButton>
                             </ToggleButtonGroup>
-                            <Card.Footer>
-                                {compliance.complianceReason}
-                            </Card.Footer>
-                        </Card.Body>
+                            <Card.Text>{compliance.complianceReason}</Card.Text>
+                        </Card.Footer>
                     </Card>
                 )}
             </div>
